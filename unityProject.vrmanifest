@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.taichi.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\E0003788\\Documents\\CS4240\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "TaiChi [Testing]"
+        }
+      }
+    }
+  ]
+}

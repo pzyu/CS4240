@@ -64,4 +64,8 @@ public class LessonManager : MonoBehaviour
     private GameObject GetCurrentMove() {
         return setList[currentSet][currentMove];
     }
+
+    public void ShowMessage(string message) {
+        Debug.Log("[LessonManager] Received message: " + message);
+    }
 }

@@ -6,9 +6,19 @@ public class LessonManager : MonoBehaviour
 {
     public static LessonManager lessonManagerInstance;
 
+    [System.Serializable]
+    public struct MoveList {
+        public List<Move> list;
+    }
+
+    [System.Serializable]
+    public struct SetList {
+        public List<MoveList> list;
+    }
+    
     [SerializeField]
     // A list of Sets, each set contains a list of moves
-    private List<List<GameObject>> setList;
+    private SetList setList;
 
     [SerializeField]
     // Anchor used to determine where to place the move in front of the player
@@ -28,13 +38,24 @@ public class LessonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PopulateSetsWithMoves();
+        ShowMove(setList.list[currentSet].list[currentMove]);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void PopulateSetsWithMoves() {
+        for (int i = 0; i < GetNumberOfSets(); i++) {
+            for (int j = 0; j < GetNumberOfMovesInSet(i); j++) {
+                Move move = Instantiate(setList.list[i].list[j], transform.position, transform.rotation, transform);
+                setList.list[i].list[j] = move;
+                //HideMove(move);
+            }
+        }
     }
 
     public void CompleteMove() {
@@ -49,23 +70,35 @@ public class LessonManager : MonoBehaviour
         GetCurrentSet();
     }
 
-    public void ShowMove(GameObject move) {
+    public void ShowMove(Move move) {
         // Show move in front of player
+        move.Show();
     }
 
-    public void HideMove(GameObject move) {
+    public void HideMove(Move move) {
         // Hide move from the player
+        move.Hide();
+    }
+    
+    private MoveList GetCurrentSet() {
+        return setList.list[currentSet];
     }
 
-    private List<GameObject> GetCurrentSet() {
-        return setList[currentSet];
-    }
-
-    private GameObject GetCurrentMove() {
-        return setList[currentSet][currentMove];
+    private Move GetCurrentMove() {
+        return setList.list[currentSet].list[currentMove];
     }
 
     public void ShowMessage(string message) {
         Debug.Log("[LessonManager] Received message: " + message);
+    }
+
+    // Returns the number of sets in set list
+    private int GetNumberOfSets() {
+        return setList.list.Count;
+    }
+
+    // Returns the number of moves in a set given the set index
+    private int GetNumberOfMovesInSet(int setIndex) {
+        return setList.list[currentSet].list.Count;
     }
 }

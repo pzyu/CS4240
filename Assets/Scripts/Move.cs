@@ -25,6 +25,8 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		Debug.Log(gameObject.name);
+
         StartCoroutine(CheckStrokesCoroutine());   
     }
 

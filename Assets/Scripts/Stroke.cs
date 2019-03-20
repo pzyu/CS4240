@@ -7,6 +7,9 @@ public class Stroke : MonoBehaviour
 {
     private Move move;
 
+    [SerializeField]
+    private GameObject trailRenderer;
+
     private List<GameObject> checkpointList;
     private int currentTarget = 0;
 
@@ -24,6 +27,8 @@ public class Stroke : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++) {
             checkpointList.Add(transform.GetChild(i).gameObject);
+            // 9 is checkpoint
+            checkpointList[i].gameObject.layer = 9;
         }
 
         ResetStroke();
@@ -41,7 +46,6 @@ public class Stroke : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame

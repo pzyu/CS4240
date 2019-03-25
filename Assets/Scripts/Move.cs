@@ -44,7 +44,9 @@ public class Move : MonoBehaviour
         
         if (currentReps >= amountToRepeat) {
             Debug.Log("[Move] Move complete!");
+            LessonManager.lessonManagerInstance.CompleteMove();
         } else {
+            yield return new WaitForSeconds(0.5f);
             ResetAllStrokes();
             StartCoroutine(CheckStrokesCoroutine());
         }

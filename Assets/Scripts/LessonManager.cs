@@ -53,15 +53,17 @@ public class LessonManager : MonoBehaviour
             for (int j = 0; j < GetNumberOfMovesInSet(i); j++) {
                 Move move = Instantiate(setList.list[i].list[j], transform.position, transform.rotation, transform);
                 setList.list[i].list[j] = move;
-                //HideMove(move);
+                HideMove(move);
             }
         }
     }
 
     public void CompleteMove() {
-        currentMove++;
+        HideMove(GetCurrentMove());
 
-        GetCurrentMove();
+        currentMove++;
+        
+        ShowMove(GetCurrentMove());
     }
 
     public void CompleteSet() {

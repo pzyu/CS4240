@@ -24,6 +24,9 @@ public class LessonManager : MonoBehaviour
     // Anchor used to determine where to place the move in front of the player
     private GameObject playerAnchor;
 
+    [SerializeField]
+    private Animator targetsController;
+
     private int currentSet = 0;
     private int currentMove = 0;
 
@@ -75,6 +78,8 @@ public class LessonManager : MonoBehaviour
     public void ShowMove(Move move) {
         // Show move in front of player
         move.Show();
+
+        UpdateTargetController();
     }
 
     public void HideMove(Move move) {
@@ -102,5 +107,24 @@ public class LessonManager : MonoBehaviour
     // Returns the number of moves in a set given the set index
     private int GetNumberOfMovesInSet(int setIndex) {
         return setList.list[currentSet].list.Count;
+    }
+
+    private void UpdateTargetController() {
+        switch (GetCurrentMove().GetMoveType()) {
+            case Move.TYPE.FLAPPYBIRD:
+                targetsController.SetTrigger("FlappyBirdTrigger");
+                break;
+            case Move.TYPE.FRONTALWAVE:
+                targetsController.SetTrigger("FrontalWaveTrigger");
+                break;
+            case Move.TYPE.TREEHUG:
+                targetsController.SetTrigger("TreeHugTrigger");
+                break;
+            case Move.TYPE.BEACHBALL:
+                targetsController.SetTrigger("BeachBallTrigger");
+                break;
+            default:
+                break;
+        }
     }
 }

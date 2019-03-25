@@ -21,6 +21,16 @@ public class Move : MonoBehaviour
     private int amountToRepeat = 2;
 
     private int currentReps = 0;
+
+    public enum TYPE {
+        FLAPPYBIRD,
+        FRONTALWAVE,
+        TREEHUG,
+        BEACHBALL
+    }
+
+    [SerializeField]
+    private TYPE moveType;
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +43,10 @@ public class Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public TYPE GetMoveType() {
+        return moveType;
     }
 
     private IEnumerator CheckStrokesCoroutine() {

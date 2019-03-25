@@ -262,6 +262,7 @@ MonoBehaviour:
   rightFeet: {fileID: 7974611282530565765}
   head: {fileID: 2288701811765983750}
   amountToRepeat: 2
+  moveType: 0
 --- !u!1 &1432674461052061116
 GameObject:
   m_ObjectHideFlags: 0

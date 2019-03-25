@@ -8,7 +8,9 @@ public class Stroke : MonoBehaviour
     private Move move;
 
     [SerializeField]
-    private GameObject trailRenderer;
+    private GameObject trailPrefab;
+    private GameObject trail;
+    ParticleSystem.EmissionModule emissionModule;
 
     private List<GameObject> checkpointList;
     private int currentTarget = 0;
@@ -20,6 +22,11 @@ public class Stroke : MonoBehaviour
     private bool isCheckpointHeld = false;
     private bool isPlayerInCheckpoint = false;
 
+    [SerializeField]
+    private bool isOneDirection = true;
+
+    private Tweener tweener;
+
     private void Awake() {
         move = GetComponentInParent<Move>();
 
@@ -30,14 +37,19 @@ public class Stroke : MonoBehaviour
             // 9 is checkpoint
             checkpointList[i].gameObject.layer = 9;
         }
+        
+        trail = Lean.Pool.LeanPool.Spawn(trailPrefab);
+        emissionModule = trail.GetComponent<ParticleSystem>().emission;
 
-        ResetStroke();
+        ResetStroke(false);
 
         Hide();
     }
 
-    public void ResetStroke() {
-        Show();
+    public void ResetStroke(bool show = true) {
+        if (show) {
+            Show();
+        }
         currentTarget = 0;
         isStrokeComplete = false;
         isPlayerInCheckpoint = false;
@@ -63,6 +75,9 @@ public class Stroke : MonoBehaviour
             //Debug.Log(checkpointList[i].transform.parent.name);
             checkpointList[i].GetComponent<MeshRenderer>().material.DOFade(0.0f, 0.1f);
         }
+
+        emissionModule.rateOverTime = 0;
+        tweener.Pause();
     }
 
     public void Show() {
@@ -81,7 +96,7 @@ public class Stroke : MonoBehaviour
         }
 
         SetReady();
-
+        ShowTrail();
     }
 
     public void SetReady(bool ready = true) {
@@ -94,6 +109,7 @@ public class Stroke : MonoBehaviour
 
     public void SetStrokeComplete(bool complete = true) {
         isStrokeComplete = complete;
+        SetReady(false);
 
         Debug.Log("[Stroke] Checkpoint complete!");
     }
@@ -103,7 +119,7 @@ public class Stroke : MonoBehaviour
     }
 
     public bool TryCheckpoint(GameObject checkpoint) {
-        if (GetIsStrokeComplete()) {
+        if (GetIsStrokeComplete() || !IsReady()) {
             return false;
         }
 
@@ -145,5 +161,60 @@ public class Stroke : MonoBehaviour
 
             Debug.Log("[Stroke] Player exit: " + transform.name);
         }
+    }
+
+    private void ShowTrail() {
+        if (GetIsCheckpointHeld()) {
+            //return;
+        }
+
+        int index = 0;
+        int direction = 1;
+
+        Vector3 position = checkpointList[index].transform.position;
+
+        if (!trail) {
+            trail = Lean.Pool.LeanPool.Spawn(trailPrefab);
+        }
+
+        tweener = trail.transform.DOMove(position, 0.5f).SetEase(Ease.Linear);
+        tweener.OnComplete(() => {
+
+            Vector3 originalPosition = position;
+            
+            index += direction;
+
+            if (isOneDirection) {
+                // If exceed count
+                if (index >= transform.childCount) {
+                    index = 0;
+                    originalPosition = checkpointList[index].transform.position;
+                    emissionModule.rateOverTime = 0;
+                }
+            } else {
+                if (index >= transform.childCount) {
+                    index = transform.childCount - 1;
+                    direction = -1;
+                    originalPosition = checkpointList[index].transform.position;
+                    emissionModule.rateOverTime = 0;
+                }
+
+                if (index < 0) {
+                    index = 0;
+                    direction = 1;
+                    originalPosition = checkpointList[index].transform.position;
+                    emissionModule.rateOverTime = 0;
+                }
+            }
+
+            position = checkpointList[index].transform.position;
+
+            tweener.ChangeValues(originalPosition, position);
+            tweener.Play();
+        });
+
+        tweener.OnUpdate(() => {
+            emissionModule.rateOverTime = 20;
+        });
     }
 }

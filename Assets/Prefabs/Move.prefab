@@ -53,6 +53,7 @@ MonoBehaviour:
   leftFeet: {fileID: 6323242049957651331}
   rightFeet: {fileID: 5669046706158935792}
   head: {fileID: 4595051984920730227}
+  amountToRepeat: 2
 --- !u!1 &4595051984920730228
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac874e70908cf04c8361795096c9f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 2458156783435031344, guid: 39d700c65b456a24e9f43da21e2b10f1,
+    type: 3}
   isCheckpointHeld: 1
 --- !u!1 &4595051985638343747
 GameObject:
@@ -350,6 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac874e70908cf04c8361795096c9f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 2458156783435031344, guid: 39d700c65b456a24e9f43da21e2b10f1,
+    type: 3}
   isCheckpointHeld: 1
 --- !u!1 &6323242049231650227
 GameObject:
@@ -499,6 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac874e70908cf04c8361795096c9f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 2458156783435031344, guid: 39d700c65b456a24e9f43da21e2b10f1,
+    type: 3}
   isCheckpointHeld: 1
 --- !u!1001 &618038350179242740
 PrefabInstance:
@@ -567,6 +574,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4062225528774225811, guid: 4ba3bdb2d5b59b04c9336c911ab71378,
+        type: 3}
+      propertyPath: trailPrefab
+      value: 
+      objectReference: {fileID: 2458156783435031344, guid: 39d700c65b456a24e9f43da21e2b10f1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba3bdb2d5b59b04c9336c911ab71378, type: 3}
 --- !u!114 &3516284375452679527 stripped
@@ -669,6 +682,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.29999998
       objectReference: {fileID: 0}
+    - target: {fileID: 4062225528774225811, guid: 4ba3bdb2d5b59b04c9336c911ab71378,
+        type: 3}
+      propertyPath: trailPrefab
+      value: 
+      objectReference: {fileID: 2458156783435031344, guid: 39d700c65b456a24e9f43da21e2b10f1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba3bdb2d5b59b04c9336c911ab71378, type: 3}
 --- !u!114 &5695673344153177395 stripped

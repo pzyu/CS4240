@@ -52,9 +52,10 @@ public class LessonManager : MonoBehaviour
     }
 
     private void PopulateSetsWithMoves() {
+        Vector3 rotation = new Vector3(0, 180, 0);
         for (int i = 0; i < GetNumberOfSets(); i++) {
             for (int j = 0; j < GetNumberOfMovesInSet(i); j++) {
-                Move move = Instantiate(setList.list[i].list[j], transform.position, transform.rotation, transform);
+                Move move = Instantiate(setList.list[i].list[j], playerAnchor.transform.position, transform.rotation, playerAnchor.transform);
                 setList.list[i].list[j] = move;
                 HideMove(move);
             }

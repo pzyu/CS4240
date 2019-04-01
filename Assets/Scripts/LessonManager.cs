@@ -28,6 +28,9 @@ public class LessonManager : MonoBehaviour
     private Animator targetsController;
 
     [SerializeField]
+    private GameObject playerCamera;
+
+    [SerializeField]
     private List<Animator> targetsControllerList;
 
     private int currentSet = 0;
@@ -52,7 +55,13 @@ public class LessonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Space)) {
+            CenterLessonAnchor();
+        }   
+    }
+
+    private void CenterLessonAnchor() {
+        playerAnchor.transform.position = new Vector3(playerCamera.transform.position.x, 0, playerCamera.transform.position.z);
     }
 
     private void InitializeTargetsControllers() {

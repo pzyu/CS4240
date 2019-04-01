@@ -27,6 +27,9 @@ public class LessonManager : MonoBehaviour
     [SerializeField]
     private Animator targetsController;
 
+    [SerializeField]
+    private List<Animator> targetsControllerList;
+
     private int currentSet = 0;
     private int currentMove = 0;
 
@@ -41,6 +44,7 @@ public class LessonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //InitializeTargetsControllers();
         PopulateSetsWithMoves();
         ShowMove(setList.list[currentSet].list[currentMove]);
     }
@@ -49,6 +53,17 @@ public class LessonManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void InitializeTargetsControllers() {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Targets");
+
+        Debug.LogWarning("Targets length: " + targets.Length);
+
+        for (int i = 0; i < targets.Length; i++) {
+            Debug.Log(targets[i].GetComponent<Animator>());
+            targetsControllerList.Add(targets[i].GetComponent<Animator>());
+        }
     }
 
     private void PopulateSetsWithMoves() {
@@ -111,21 +126,33 @@ public class LessonManager : MonoBehaviour
     }
 
     private void UpdateTargetController() {
+        Debug.Log("New move: " + GetCurrentMove().GetMoveType());
+
         switch (GetCurrentMove().GetMoveType()) {
             case Move.TYPE.FLAPPYBIRD:
-                targetsController.SetTrigger("FlappyBirdTrigger");
+                //targetsController.SetTrigger("FlappyBirdTrigger");
+                SetTargetsTrigger("FlappyBirdTrigger");
                 break;
             case Move.TYPE.FRONTALWAVE:
-                targetsController.SetTrigger("FrontalWaveTrigger");
+                //targetsController.SetTrigger("FrontalWaveTrigger");
+                SetTargetsTrigger("FrontalWaveTrigger");
                 break;
             case Move.TYPE.TREEHUG:
-                targetsController.SetTrigger("TreeHugTrigger");
+                //targetsController.SetTrigger("TreeHugTrigger");
+                SetTargetsTrigger("TreeHugTrigger");
                 break;
             case Move.TYPE.BEACHBALL:
-                targetsController.SetTrigger("BeachBallTrigger");
+                //targetsController.SetTrigger("BeachBallTrigger");
+                SetTargetsTrigger("BeachBallTrigger");
                 break;
             default:
                 break;
+        }
+    }
+
+    private void SetTargetsTrigger(string triggerName) {
+        for (int i = 0; i < targetsControllerList.Count; i++) {
+            targetsControllerList[i].SetTrigger(triggerName);
         }
     }
 }

@@ -151,7 +151,7 @@ public class Stroke : MonoBehaviour
         if (!isPlayerInCheckpoint) {
             isPlayerInCheckpoint = true;
 
-            Debug.Log("[Stroke] Player entered: " + transform.name);
+            //Debug.Log("[Stroke] Player entered: " + transform.name);
         }
     }
 
@@ -159,7 +159,7 @@ public class Stroke : MonoBehaviour
         if (isPlayerInCheckpoint) {
             isPlayerInCheckpoint = false;
 
-            Debug.Log("[Stroke] Player exit: " + transform.name);
+            //Debug.Log("[Stroke] Player exit: " + transform.name);
         }
     }
 

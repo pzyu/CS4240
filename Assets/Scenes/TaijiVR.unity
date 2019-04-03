@@ -2959,7 +2959,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 762162989}
   sfxSource: {fileID: 762162988}
-  bgmList: []
+  bgmList:
+  - {fileID: 8300000, guid: 402d87d389a1e2a46a272a9fddf2cd5b, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 77a80431886ee504799e367e6d6ce8f6, type: 3}
 --- !u!4 &762162991

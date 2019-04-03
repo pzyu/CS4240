@@ -85,6 +85,7 @@ public class Player : MonoBehaviour {
 
     private void OpenMenu() {
         loadingWheel.DOFade(0.0f, 0.25f);
+        AudioManager.audioManagerInstance.PlaySFX(AudioManager.SFX.SUCCESS);
         SetPromptText("Great job!", 4.0f);
         
         Vector3 difference = leftCollider.GetColliderPosition() - transform.position;
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour {
         SetPromptText("Try to follow the moves as shown by the instructors");
         yield return new WaitForSeconds(4.0f);
         SetPromptText("When you have completed a move successfully, you will hear this sound!");
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1.0f);
         AudioManager.audioManagerInstance.PlaySFX(AudioManager.SFX.SUCCESS);
         yield return new WaitForSeconds(4.0f);
         SetPromptText("Have fun!");

@@ -34,12 +34,14 @@ public class AudioManager : MonoBehaviour {
         }
 
         bgmSource.volume = 0.3f;
+        bgmSource.loop = true;
+
         sfxSource.volume = 0.6f;
     }
 
     // Start is called before the first frame update
     void Start() {
-
+        PlayBGM(BGM.CALM);
     }
 
     // Update is called once per frame

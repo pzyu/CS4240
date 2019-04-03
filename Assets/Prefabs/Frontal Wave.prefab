@@ -838,7 +838,7 @@ MonoBehaviour:
   leftFeet: {fileID: 5003228229360273644}
   rightFeet: {fileID: 6630386369036531103}
   head: {fileID: 3272786364337713436}
-  amountToRepeat: 2
+  amountToRepeat: 5
   moveType: 1
 --- !u!1 &2819636773747985389
 GameObject:

@@ -23,10 +23,7 @@ public class LessonManager : MonoBehaviour
     [SerializeField]
     // Anchor used to determine where to place the move in front of the player
     private GameObject playerAnchor;
-
-    [SerializeField]
-    private Animator targetsController;
-
+    
     [SerializeField]
     private GameObject playerCamera;
 
@@ -35,6 +32,12 @@ public class LessonManager : MonoBehaviour
 
     private int currentSet = 0;
     private int currentMove = 0;
+
+    private float currentClipTime;
+    private float currentClipLength;
+    private int clipLoops = 1;
+    private bool isAnimationComplete = false;
+    private bool isMoveComplete = false;
 
     private void Awake() {
         if (!lessonManagerInstance) {
@@ -49,7 +52,16 @@ public class LessonManager : MonoBehaviour
     {
         //InitializeTargetsControllers();
         PopulateSetsWithMoves();
+        HideLessonAnchor();
+
+        //StartLesson();
+    }
+
+    public void StartLesson() {
         ShowMove(setList.list[currentSet].list[currentMove]);
+        StartCoroutine(CheckMoves());
+
+        CenterLessonAnchor();
     }
 
     // Update is called once per frame
@@ -57,11 +69,52 @@ public class LessonManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space)) {
             CenterLessonAnchor();
-        }   
+        }
     }
 
-    private void CenterLessonAnchor() {
-        playerAnchor.transform.position = new Vector3(playerCamera.transform.position.x, 0, playerCamera.transform.position.z);
+    public void ResetLoops() {
+        clipLoops = 1;
+    }
+
+    public void SetAnimationComplete() {
+        isAnimationComplete = true;
+    }
+
+    private IEnumerator CheckMoves() {
+        yield return new WaitForSeconds(0.2f);
+        if (isAnimationComplete) {
+            isAnimationComplete = false;
+
+            if (isMoveComplete) {
+                StartNextMove();
+            }
+        }
+        StartCoroutine(CheckMoves());
+    }
+
+    private float GetCurrentClipTime() {
+        AnimatorStateInfo animatorState = targetsControllerList[0].GetCurrentAnimatorStateInfo(0);
+        AnimatorClipInfo[] myAnimatorClip = targetsControllerList[0].GetCurrentAnimatorClipInfo(0);
+        currentClipTime = myAnimatorClip[0].clip.length * animatorState.normalizedTime;
+
+        return currentClipTime;
+    }
+
+    private float GetCurrentClipLength() {
+
+        AnimatorStateInfo animatorState = targetsControllerList[0].GetCurrentAnimatorStateInfo(0);
+        AnimatorClipInfo[] myAnimatorClip = targetsControllerList[0].GetCurrentAnimatorClipInfo(0);
+        currentClipLength = myAnimatorClip[0].clip.length * clipLoops;
+
+        return currentClipLength;
+    }
+
+    public void CenterLessonAnchor() {
+        playerAnchor.transform.position = new Vector3(playerCamera.transform.position.x, playerCamera.transform.position.y - 0.3f, playerCamera.transform.position.z - 0.1f);
+    }
+
+    public void HideLessonAnchor() {
+        playerAnchor.transform.position = new Vector3(0, -10, 0);
     }
 
     private void InitializeTargetsControllers() {
@@ -87,17 +140,34 @@ public class LessonManager : MonoBehaviour
     }
 
     public void CompleteMove() {
+        clipLoops = 1;
+        isMoveComplete = true;
+    }
+
+    private void StartNextMove() {
+        isMoveComplete = false;
         HideMove(GetCurrentMove());
 
         currentMove++;
-        
-        ShowMove(GetCurrentMove());
+
+        if (AreAllMovesInSetComplete()) {
+            Debug.Log("SET COMPLETE!");
+            CompleteSet();
+        } else {
+            ShowMove(GetCurrentMove());
+        }
     }
 
     public void CompleteSet() {
         currentSet++;
 
-        GetCurrentSet();
+        if (AreAllSetsComplete()) {
+            Debug.Log("All sets complete!");
+            HideLessonAnchor();
+            Player.playerInstance.SetPromptText("Thanks for playing!");
+        }
+
+        //GetCurrentSet();
     }
 
     public void ShowMove(Move move) {
@@ -110,6 +180,14 @@ public class LessonManager : MonoBehaviour
     public void HideMove(Move move) {
         // Hide move from the player
         move.Hide();
+    }
+
+    private bool AreAllMovesInSetComplete() {
+        return currentMove >= setList.list[currentSet].list.Count;
+    }
+
+    private bool AreAllSetsComplete() {
+        return currentSet >= setList.list.Count;
     }
     
     private MoveList GetCurrentSet() {
@@ -136,7 +214,7 @@ public class LessonManager : MonoBehaviour
 
     private void UpdateTargetController() {
         Debug.Log("New move: " + GetCurrentMove().GetMoveType());
-
+        
         switch (GetCurrentMove().GetMoveType()) {
             case Move.TYPE.FLAPPYBIRD:
                 //targetsController.SetTrigger("FlappyBirdTrigger");

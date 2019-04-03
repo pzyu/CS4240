@@ -1009,7 +1009,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4125866999908427143}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.6, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.29999998, y: 0.29999998, z: 0.29999998}
   m_Children:
   - {fileID: 5783187010879310657}
@@ -1094,7 +1094,7 @@ MonoBehaviour:
   leftFeet: {fileID: 6485610075719713605}
   rightFeet: {fileID: 4858628450603089462}
   head: {fileID: 3604507302701922997}
-  amountToRepeat: 2
+  amountToRepeat: 5
   moveType: 0
 --- !u!1 &4812720306083180610
 GameObject:
@@ -1329,7 +1329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4812720307042741746}
   m_LocalRotation: {x: -0, y: 0.0000014603138, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.29999998, y: 0.29999998, z: 0.29999998}
   m_Children:
   - {fileID: 4812720307391263684}

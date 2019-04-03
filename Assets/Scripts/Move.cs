@@ -31,6 +31,8 @@ public class Move : MonoBehaviour
 
     [SerializeField]
     private TYPE moveType;
+
+    private bool skip = false;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +55,11 @@ public class Move : MonoBehaviour
         Debug.Log("[Move] Current rep: " + (currentReps + 1));
  
         yield return new WaitUntil(AreAllStrokesComplete);
-        Debug.Log("Adding current rep");
+
+        AudioManager.audioManagerInstance.PlaySFX(AudioManager.SFX.SUCCESS);
+        Player.playerInstance.ShowPositiveMessage();
+
+        Debug.Log(transform.name + " Adding current rep");
         currentReps++;
         
         if (currentReps >= amountToRepeat) {

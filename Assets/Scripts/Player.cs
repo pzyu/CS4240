@@ -21,6 +21,12 @@ public class Player : MonoBehaviour {
     private TextMeshProUGUI promptText;
 
     [SerializeField]
+    private GameObject armsOutMan;
+
+    [SerializeField]
+    private GameObject background;
+
+    [SerializeField]
     private Image loadingWheel;
 
     private float timeRequiredToOpenMenu = 2.0f;
@@ -97,6 +103,7 @@ public class Player : MonoBehaviour {
 
     private IEnumerator StartTutorial() {
         yield return new WaitForSeconds(2.0f);
+        armsOutMan.GetComponent<Renderer>().enabled = false;
         SetPromptText("Please put down your hands");
         yield return new WaitForSeconds(4.0f);
         SetPromptText("Try to follow the moves as shown by the instructors");
@@ -107,6 +114,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(4.0f);
         SetPromptText("Have fun!");
         yield return new WaitForSeconds(4.0f);
+        background.GetComponent<Image>().CrossFadeAlpha(0f, 0f, false);
 
         LessonManager.lessonManagerInstance.StartLesson();
     }

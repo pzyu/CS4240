@@ -56,7 +56,6 @@ public class Player : MonoBehaviour {
         loadingWheel.fillAmount = 0.0f;
         //HidePromptText(0, true);
         promptText.text = "Please stretch your arms to the side";
-        StartCoroutine(StartTutorial());
     }
 
     // Update is called once per frame

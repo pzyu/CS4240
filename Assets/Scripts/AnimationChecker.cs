@@ -22,6 +22,6 @@ public class AnimationChecker : MonoBehaviour
         Debug.Log("Set animation complete!");
         isAnimationComplete = true;
 
-        LessonManager.lessonManagerInstance.SetAnimationComplete();
+        LM.lessonManagerInstance.SetAnimationComplete();
     }
 }

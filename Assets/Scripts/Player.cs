@@ -116,7 +116,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(4.0f);
         background.GetComponent<Image>().CrossFadeAlpha(0f, 0f, false);
 
-        LessonManager.lessonManagerInstance.StartLesson();
+        LM.lessonManagerInstance.StartLesson();
     }
 
     private void CenterPlayerOnAnchor() {

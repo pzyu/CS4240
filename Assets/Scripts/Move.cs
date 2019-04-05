@@ -64,7 +64,7 @@ public class Move : MonoBehaviour
         
         if (currentReps >= amountToRepeat) {
             Debug.Log("[Move] Move complete!");
-            LessonManager.lessonManagerInstance.CompleteMove();
+            LM.lessonManagerInstance.CompleteMove();
         } else {
             yield return new WaitForSeconds(0.5f);
             ResetAllStrokes();
@@ -107,7 +107,7 @@ public class Move : MonoBehaviour
 
     // Sends a message to LessonManager in case there is something to notify the player
     public void SendMessageToLessonManager(string message) {
-        LessonManager.lessonManagerInstance.ShowMessage(message);
+        LM.lessonManagerInstance.ShowMessage(message);
     }
 
     public void Hide() {

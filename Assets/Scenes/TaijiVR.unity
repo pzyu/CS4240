@@ -118,6 +118,60 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 2026927598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &134687747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134687749}
+  - component: {fileID: 134687748}
+  m_Layer: 0
+  m_Name: LM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &134687748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134687747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5905d504910ed34fabb9d61501a2034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setList:
+    list:
+    - list:
+      - {fileID: 3173006859226138285, guid: 5d73f7602ea89f64bba4c6324e10b609, type: 3}
+      - {fileID: 3703724150184168708, guid: 66179f9e5e2916d409cffef8be391f52, type: 3}
+  playerAnchor: {fileID: 1535038478}
+  playerCamera: {fileID: 1534443008}
+  targetsControllerList:
+  - {fileID: 1408386904}
+  - {fileID: 1752134968}
+  - {fileID: 182540617}
+--- !u!4 &134687749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134687747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.36549175, y: -5.0731225, z: -0.7503526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0

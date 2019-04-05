@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LessonManagerNew : MonoBehaviour {
-    public static LessonManagerNew lessonManagerInstance;
+public class LM : MonoBehaviour {
+    public static LM lessonManagerInstance;
 
     [System.Serializable]
     public struct MoveList {

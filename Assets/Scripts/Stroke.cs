@@ -90,10 +90,12 @@ public class Stroke : MonoBehaviour
         float transparency = 0.8f;
         float increment = transparency / transform.transform.childCount;
 
+        /*
         for (int i = 0; i < transform.childCount; i++) {
-            //checkpointList[i].GetComponent<MeshRenderer>().material.DOFade(transparency, 0.1f);
+            checkpointList[i].GetComponent<MeshRenderer>().material.DOFade(transparency, 0.1f);
             transparency -= increment;
         }
+        */
 
         SetReady();
         ShowTrail();
@@ -123,7 +125,7 @@ public class Stroke : MonoBehaviour
             return false;
         }
 
-        if (checkpointList[currentTarget] == checkpoint || true) {
+        if (checkpointList[currentTarget] == checkpoint) {
             Debug.Log("[Stroke] Checkpoint met!");
             currentTarget++;
 

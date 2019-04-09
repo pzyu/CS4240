@@ -108,6 +108,7 @@ public class LM : MonoBehaviour {
 
     public void CenterLessonAnchor() {
         playerAnchor.transform.position = new Vector3(playerCamera.transform.position.x, playerCamera.transform.position.y - 0.3f, playerCamera.transform.position.z - 0.1f);
+        playerAnchor.transform.Rotate(new Vector3(0, playerCamera.transform.rotation.eulerAngles.y, 0));
     }
 
     public void HideLessonAnchor() {

@@ -16,6 +16,9 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private SideCollider rightCollider;
+    
+    [SerializeField]
+    private TextMeshProUGUI titleText;
 
     [SerializeField]
     private TextMeshProUGUI promptText;
@@ -52,10 +55,12 @@ public class Player : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        isCalibrating = true;
         loadingWheel.fillAmount = 0.0f;
-        //HidePromptText(0, true);
-        promptText.text = "Please stretch your arms to the side";
+
+        HidePromptText(0, true);
+        HideMan(true);
+        HideTitle(true);
+        ShowTitle();
     }
 
     // Update is called once per frame
@@ -66,12 +71,41 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private void ShowTitle(float delay = 2.0f) {
+        titleText.DOFade(1.0f, 2.0f).SetDelay(delay);
+        titleText.transform.DOLocalMoveY(0.6f, 2.0f).SetDelay(delay).OnComplete(()=> {
+            StartCoroutine(StartMenu());
+        });
+    }
+
+    private void HideTitle(bool instant = false) {
+        if (!instant) {
+            titleText.DOFade(0.0f, 0.5f);
+            titleText.transform.DOLocalMoveY(0.0f, 1.0f);
+        } else {
+            titleText.alpha = 0;
+            titleText.transform.localPosition = new Vector3(0, 0, 0);
+        }
+    }
+
+    private void ShowMan() {
+        armsOutMan.GetComponent<SpriteRenderer>().DOFade(1.0f, 1.0f);
+    }
+
+    private void HideMan(bool instant = false) {
+        if (!instant) {
+            armsOutMan.GetComponent<SpriteRenderer>().DOFade(0.0f, 1.0f);
+        } else {
+            armsOutMan.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
+        }
+    }
+
     private void CheckMenu() {
         if (leftCollider.GetHasPlayerCollided() && rightCollider.GetHasPlayerCollided()) {
             currentTime += Time.deltaTime;
 
             if (loadingWheel.color.a == 0) {
-                loadingWheel.DOFade(1.0f, 0.25f);
+                loadingWheel.DOFade(0.5f, 0.25f);
             }
 
             float ratio = currentTime / timeRequiredToOpenMenu;
@@ -92,6 +126,11 @@ public class Player : MonoBehaviour {
     private void OpenMenu() {
         loadingWheel.DOFade(0.0f, 0.25f);
         AudioManager.audioManagerInstance.PlaySFX(AudioManager.SFX.SUCCESS);
+        HideMan();
+        HideTitle();
+
+        promptText.transform.DOLocalMoveY(0.4f, 1.0f).SetRelative();
+
         SetPromptText("Great job!", 4.0f);
         
         Vector3 difference = leftCollider.GetColliderPosition() - transform.position;
@@ -101,9 +140,15 @@ public class Player : MonoBehaviour {
         StartCoroutine(StartTutorial());
     }
 
+    private IEnumerator StartMenu() {
+        yield return new WaitForSeconds(1.0f);
+        ShowMan();
+        SetPromptText("Stretch your hands to the side to start", 2, false);
+        isCalibrating = true;
+    }
+
     private IEnumerator StartTutorial() {
         yield return new WaitForSeconds(2.0f);
-        armsOutMan.GetComponent<Renderer>().enabled = false;
         SetPromptText("Please put down your hands");
         yield return new WaitForSeconds(4.0f);
         SetPromptText("Try to follow the moves as shown by the instructors");
@@ -128,11 +173,13 @@ public class Player : MonoBehaviour {
         transform.Rotate(rotation);// = rotation;
     }
 
-    public void SetPromptText(string text, float duration = 2.0f) {
+    public void SetPromptText(string text, float duration = 2.0f, bool hide = true) {
         promptText.alpha = 0;
         promptText.text = text;
         promptText.DOFade(1.0f, 0.0f).OnComplete(() => {
-            HidePromptText(duration);
+            if (hide) {
+                HidePromptText(duration);
+            }
         });
     }
 

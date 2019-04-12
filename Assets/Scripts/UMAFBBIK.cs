@@ -26,8 +26,11 @@ public class UMAFBBIK : MonoBehaviour {
     [Range(0.0f, 1.0f)] public float LeftShoulderPositionWeight;
     [Range(0.0f, 1.0f)] public float RightShoulderPositionWeight;
     [Range(0.0f, 1.0f)] public float LeftFootPositionWeight;
+    [Range(0.0f, 1.0f)] public float LeftFootRotationWeight;
     [Range(0.0f, 1.0f)] public float RightFootPositionWeight;
+    [Range(0.0f, 1.0f)] public float RightFootRotationWeight;
     [Range(0.0f, 1.0f)] public float TorsoPositionWeight;
+    [Range(0.0f, 1.0f)] public float HeadMaintainRotationWeight;
 
 
     public float lookWeight = 0f;
@@ -80,13 +83,15 @@ public class UMAFBBIK : MonoBehaviour {
 
             ik.solver.leftFootEffector.target = LeftFootTarget.transform;
             ik.solver.leftFootEffector.positionWeight = LeftFootPositionWeight;
+            ik.solver.leftFootEffector.rotationWeight = LeftFootRotationWeight;
 
             ik.solver.rightFootEffector.target = RightFootTarget.transform;
             ik.solver.rightFootEffector.positionWeight = RightFootPositionWeight;
+            ik.solver.rightFootEffector.rotationWeight = RightFootRotationWeight;
 
             ik.solver.bodyEffector.target = TorsoTarget.transform;
             ik.solver.bodyEffector.positionWeight = TorsoPositionWeight;
-            ik.solver.headMapping.maintainRotationWeight = 1.0f;
+            ik.solver.headMapping.maintainRotationWeight = HeadMaintainRotationWeight;
 
             // lookIk.solver.SetChain(references.spine, references.head, references.eyes, references.root);
  

@@ -16,6 +16,9 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private SideCollider rightCollider;
+
+    [SerializeField]
+    private Transform legTracker;
     
     [SerializeField]
     private TextMeshProUGUI titleText;
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour {
     private bool isCalibrating;
 
     private float armLength = 0.0f;
+    private float legLength = 0.0f;
 
     private int tutorialIndex = 0;
 
@@ -133,8 +137,12 @@ public class Player : MonoBehaviour {
 
         SetPromptText("Great job!", 4.0f);
         
-        Vector3 difference = leftCollider.GetColliderPosition() - transform.position;
-        armLength = Mathf.Abs(difference.x);
+        Vector3 armDifference = leftCollider.GetColliderPosition() - transform.position;
+        armLength = Mathf.Abs(armDifference.x);
+
+        Vector3 legDifference = legTracker.position - transform.position;
+        legLength = Mathf.Abs(legDifference.y);
+
         isCalibrating = false;
 
         StartCoroutine(StartTutorial());
@@ -197,5 +205,9 @@ public class Player : MonoBehaviour {
 
     private string GetRandomPositiveMessage() {
         return positiveMessageList[Random.Range(0, positiveMessageList.Count)];
+    }
+
+    public float GetLegLength() {
+        return legLength;
     }
 }

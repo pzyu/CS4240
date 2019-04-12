@@ -6060,6 +6060,7 @@ MonoBehaviour:
   playerAnchor: {fileID: 2026927600}
   leftCollider: {fileID: 1171940172}
   rightCollider: {fileID: 1705421089}
+  legTracker: {fileID: 2026927601}
   titleText: {fileID: 1203612654}
   promptText: {fileID: 1926891758}
   armsOutMan: {fileID: 1252058887}
@@ -7575,6 +7576,12 @@ Transform:
 --- !u!4 &2026927600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431768, guid: cbfd31aaac017204885fcc03f0579a1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2026927598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2026927601 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 489070, guid: cbfd31aaac017204885fcc03f0579a1a,
     type: 3}
   m_PrefabInstance: {fileID: 2026927598}
   m_PrefabAsset: {fileID: 0}

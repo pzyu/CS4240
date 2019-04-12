@@ -26,7 +26,9 @@ public class Move : MonoBehaviour
         FLAPPYBIRD,
         FRONTALWAVE,
         TREEHUG,
-        BEACHBALL
+        BEACHBALL,
+		SIDEPUSHLEFT,
+		SIDEPUSHRIGHT
     }
 
     [SerializeField]

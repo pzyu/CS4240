@@ -27,6 +27,8 @@ public class Stroke : MonoBehaviour
 
     private Tweener tweener;
 
+    private bool isTrailStarted = false;
+
     private void Awake() {
         move = GetComponentInParent<Move>();
 
@@ -98,7 +100,15 @@ public class Stroke : MonoBehaviour
         */
 
         SetReady();
-        ShowTrail();
+
+        if (!isTrailStarted) {
+            isTrailStarted = true;
+            ShowTrail();
+        }
+
+        if (GetIsCheckpointHeld()) {
+            checkpointList[0].GetComponent<Checkpoint>().ShowCheckpoint();
+        }
     }
 
     public void SetReady(bool ready = true) {
@@ -173,13 +183,16 @@ public class Stroke : MonoBehaviour
         int index = 0;
         int direction = 1;
 
+        float timePerCheckpoint = LM.lessonManagerInstance.GetCurrentClipLength() / checkpointList.Count;
+        Debug.Log("Total length: " + LM.lessonManagerInstance.GetCurrentClipLength() + " Checkpoints: " + checkpointList.Count + " Time per checkpoint: " + timePerCheckpoint);
+
         Vector3 position = checkpointList[index].transform.position;
 
         if (!trail) {
             trail = Lean.Pool.LeanPool.Spawn(trailPrefab);
         }
 
-        tweener = trail.transform.DOMove(position, 0.5f).SetEase(Ease.Linear);
+        tweener = trail.transform.DOMove(position, timePerCheckpoint).SetEase(Ease.Linear);
         tweener.OnComplete(() => {
 
             Vector3 originalPosition = position;
@@ -190,7 +203,7 @@ public class Stroke : MonoBehaviour
                 // If exceed count
                 if (index >= transform.childCount) {
                     index = 0;
-                    originalPosition = checkpointList[index].transform.position;
+                    //originalPosition = checkpointList[index].transform.position;
                     emissionModule.rateOverTime = 0;
                 }
             } else {

@@ -97,7 +97,7 @@ public class LM : MonoBehaviour {
         return currentClipTime;
     }
 
-    private float GetCurrentClipLength() {
+    private float GetCurrentClipLengthOld() {
 
         AnimatorStateInfo animatorState = targetsControllerList[0].GetCurrentAnimatorStateInfo(0);
         AnimatorClipInfo[] myAnimatorClip = targetsControllerList[0].GetCurrentAnimatorClipInfo(0);
@@ -230,14 +230,39 @@ public class LM : MonoBehaviour {
                 //targetsController.SetTrigger("BeachBallTrigger");
                 SetTargetsTrigger("BeachBallTrigger");
                 break;
+            case Move.TYPE.SIDEPUSHLEFT:
+                //targetsController.SetTrigger("BeachBallTrigger");
+                SetTargetsTrigger("SidePushLeft");
+                break;
+            case Move.TYPE.SIDEPUSHRIGHT:
+                //targetsController.SetTrigger("BeachBallTrigger");
+                SetTargetsTrigger("SidePushRight");
+                break;
             default:
                 break;
         }
+
+
+        GetCurrentClipLength();
     }
 
     private void SetTargetsTrigger(string triggerName) {
         for (int i = 0; i < targetsControllerList.Count; i++) {
             targetsControllerList[i].SetTrigger(triggerName);
         }
+    }
+
+    public float GetCurrentClipLength() {
+        float length = targetsControllerList[0].GetCurrentAnimatorStateInfo(0).length;
+
+        if (GetCurrentMove().GetMoveType() == Move.TYPE.SIDEPUSHLEFT || GetCurrentMove().GetMoveType() == Move.TYPE.SIDEPUSHRIGHT) {
+            length = 4;
+        } else {
+            length = 2.5f;
+        }
+
+        Debug.Log("Current clip length: " + length);
+
+        return length;
     }
 }

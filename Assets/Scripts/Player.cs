@@ -156,6 +156,7 @@ public class Player : MonoBehaviour {
     }
 
     private IEnumerator StartTutorial() {
+        /*
         yield return new WaitForSeconds(2.0f);
         SetPromptText("Please put down your hands");
         yield return new WaitForSeconds(4.0f);
@@ -168,7 +169,9 @@ public class Player : MonoBehaviour {
         SetPromptText("Have fun!");
         yield return new WaitForSeconds(4.0f);
         background.GetComponent<Image>().CrossFadeAlpha(0f, 0f, false);
+        */
 
+        yield return new WaitForSeconds(0.1f);
         LM.lessonManagerInstance.StartLesson();
     }
 

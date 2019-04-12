@@ -369,7 +369,7 @@ MonoBehaviour:
     assetBundleNames: 
   characterColors:
     _colors: []
-  loadPathType: 0
+  loadPathType: 1
   loadPath: CharacterRecipes
   loadFilename: InstructorHoodie.txt
   loadString: 
@@ -416,8 +416,11 @@ MonoBehaviour:
   LeftShoulderPositionWeight: 0.7
   RightShoulderPositionWeight: 0.7
   LeftFootPositionWeight: 0.7
+  LeftFootRotationWeight: 0.9
   RightFootPositionWeight: 0.7
+  RightFootRotationWeight: 0.9
   TorsoPositionWeight: 0.481
+  HeadMaintainRotationWeight: 0
   lookWeight: 0
   bodyWeight: 1
   headWeight: 1

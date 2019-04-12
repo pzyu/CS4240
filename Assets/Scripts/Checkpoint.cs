@@ -65,7 +65,7 @@ public class Checkpoint : MonoBehaviour {
     }
 
     public void ShowCheckpoint() {
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = true;
         GetComponent<MeshRenderer>().material.DOFade(1.0f, 0.01f);
     }
 }

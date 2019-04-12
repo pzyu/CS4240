@@ -140,8 +140,10 @@ public class Player : MonoBehaviour {
         Vector3 armDifference = leftCollider.GetColliderPosition() - transform.position;
         armLength = Mathf.Abs(armDifference.x);
 
-        Vector3 legDifference = legTracker.position - transform.position;
-        legLength = Mathf.Abs(legDifference.y);
+        Vector3 legDifference = legTracker.position - playerAnchor.position;
+        legLength = Mathf.Abs(legDifference.y) * 0.6f;
+
+        //1.6 2.12
 
         isCalibrating = false;
 

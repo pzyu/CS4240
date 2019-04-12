@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Move : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class Move : MonoBehaviour
     private Stroke leftFeet;
     [SerializeField]
     private Stroke rightFeet;
-    [SerializeField]
-    private Stroke head;
 
     [SerializeField]
     private int amountToRepeat = 2;
@@ -84,7 +83,6 @@ public class Move : MonoBehaviour
         rightStroke.ResetStroke();
         leftFeet.ResetStroke();
         rightFeet.ResetStroke();
-        head.ResetStroke();
     }
 
     public void CheckLeftStroke() {
@@ -126,5 +124,8 @@ public class Move : MonoBehaviour
         foreach (Stroke stroke in strokeList) {
             stroke.Show();
         }
+
+        leftFeet.transform.DOLocalMoveY(-Player.playerInstance.GetLegLength(), 0.01f);
+        rightFeet.transform.DOLocalMoveY(-Player.playerInstance.GetLegLength(), 0.01f);
     }
 }

@@ -101,7 +101,7 @@ public class Stroke : MonoBehaviour
 
         SetReady();
 
-        if (!isTrailStarted) {
+        if (!isTrailStarted && !GetIsCheckpointHeld()) {
             isTrailStarted = true;
             ShowTrail();
         }

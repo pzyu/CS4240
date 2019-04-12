@@ -7445,6 +7445,14 @@ PrefabInstance:
       propertyPath: m_overrideModel
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 11485484, guid: cbfd31aaac017204885fcc03f0579a1a, type: 3}
+      propertyPath: m_mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481170, guid: cbfd31aaac017204885fcc03f0579a1a, type: 3}
+      propertyPath: m_mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfd31aaac017204885fcc03f0579a1a, type: 3}
 --- !u!4 &2026927599 stripped

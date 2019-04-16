@@ -103,7 +103,7 @@ namespace UMA.CharacterSystem.Examples
         /// </summary>
         public void DnaClick()
         {
-            Cleanup();
+            Cleanup();  
             Dictionary<string,DnaSetter> AllDNA = Avatar.GetDNA();
             foreach( KeyValuePair<string, DnaSetter> ds in AllDNA)
             {

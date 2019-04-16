@@ -384,11 +384,11 @@ MonoBehaviour:
     _colors: []
   loadPathType: 1
   loadPath: CharacterRecipes
-  loadFilename: InstructorHoodie.txt
+  loadFilename: InstructorSkinny
   loadString: 
   loadFileOnStart: 1
   waitForBundles: 1
-  defaultLoadOptions: 27
+  defaultLoadOptions: 31
   savePathType: 0
   savePath: 
   saveFilename: 

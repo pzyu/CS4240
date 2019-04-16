@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour {
             Destroy(audioManagerInstance);
         }
 
-        bgmSource.volume = 0.3f;
+        bgmSource.volume = 0.5f;
         bgmSource.loop = true;
 
         sfxSource.volume = 0.6f;

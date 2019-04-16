@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LM : MonoBehaviour {
     public static LM lessonManagerInstance;
@@ -67,6 +68,10 @@ public class LM : MonoBehaviour {
         if (Input.GetKey(KeyCode.Space)) {
             CenterLessonAnchor();
         }
+
+        if (Input.GetKey(KeyCode.R)) {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void ResetLoops() {
@@ -83,6 +88,7 @@ public class LM : MonoBehaviour {
             isAnimationComplete = false;
 
             if (isMoveComplete) {
+                Player.playerInstance.ShowPanel();
                 StartNextMove();
             }
         }

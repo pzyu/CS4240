@@ -75,7 +75,7 @@ public class Move : MonoBehaviour
 
     private bool AreAllStrokesComplete() {
         return leftStroke.GetIsStrokeComplete() && rightStroke.GetIsStrokeComplete() &&
-        (leftFeet.GetIsPlayerInCheckpoint() || rightFeet.GetIsPlayerInCheckpoint());
+        (leftFeet.GetIsPlayerInCheckpoint() || rightFeet.GetIsPlayerInCheckpoint() || true);
     }
 
     private void ResetAllStrokes() {

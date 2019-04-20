@@ -35,6 +35,9 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Image loadingWheel;
 
+    [SerializeField]
+    private Image fadePanel;
+
     private float timeRequiredToOpenMenu = 2.0f;
     private float currentTime = 0.0f;
 
@@ -73,6 +76,14 @@ public class Player : MonoBehaviour {
         if (isCalibrating) {
             CheckMenu();
         }
+    }
+
+    public void ShowPanel() {
+        fadePanel.DOFade(1.0f, 0.5f).OnComplete(HidePanel);
+    }
+
+    public void HidePanel() {
+        fadePanel.DOFade(0.0f, 0.5f);
     }
 
     private void ShowTitle(float delay = 2.0f) {

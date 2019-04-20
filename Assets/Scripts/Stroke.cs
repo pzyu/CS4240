@@ -225,7 +225,7 @@ public class Stroke : MonoBehaviour
             position = checkpointList[index].transform.position;
 
             tweener.ChangeValues(originalPosition, position);
-            tweener.Play();
+            tweener.Restart();
         });
 
         tweener.OnUpdate(() => {

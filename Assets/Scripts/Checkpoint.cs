@@ -25,23 +25,6 @@ public class Checkpoint : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter1(Collider other) {
-        // If stroke needs player to hold position
-        if (stroke.IsReady() && stroke.GetIsCheckpointHeld()) {
-            //stroke.OnPlayerEnter();
-        } else {
-            if (!isCollided && !stroke.GetIsStrokeComplete() && stroke.IsReady() && stroke.TryCheckpoint(gameObject)) {
-                Debug.Log("Collided!!!" + transform.name + " Parent: " + transform.parent.name);
-                isCollided = true;
-                GetComponent<MeshRenderer>().material.DOFade(0.0f, 0.2f).OnComplete(() => {
-                    GetComponent<MeshRenderer>().material.DOFade(materialTransparency, 1.0f).SetDelay(2.0f);
-                    isCollided = false;
-                });
-                //GetComponent<MeshRenderer>().material.color = new Color(materialColor.r, materialColor.g, materialColor.b, 0);
-            }
-        }
-    }
-
     private void OnTriggerExit(Collider other) {
         // If stroke needs player to hold position
         if (stroke.IsReady() && stroke.GetIsCheckpointHeld()) {

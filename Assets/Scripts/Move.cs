@@ -85,26 +85,6 @@ public class Move : MonoBehaviour
         rightFeet.ResetStroke();
     }
 
-    public void CheckLeftStroke() {
-
-    }
-
-    public void CheckRightStroke() {
-
-    }
-
-    public void CheckLeftFeet() {
-
-    }
-
-    public void CheckRightFeet() {
-
-    }
-
-    public void CheckHead() {
-
-    }
-
     // Sends a message to LessonManager in case there is something to notify the player
     public void SendMessageToLessonManager(string message) {
         LM.lessonManagerInstance.ShowMessage(message);
